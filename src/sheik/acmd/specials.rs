@@ -24,6 +24,8 @@ unsafe fn sheik_needles(agent: &mut L2CAgentBase) {
         macros::ATK_POWER(agent, 0, 1.0);
     }
 }
+
+
 #[acmd_script( agent = "sheik", script = "game_speciallwattack", category = ACMD_GAME, low_priority )]
 unsafe fn sheik_bf(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);

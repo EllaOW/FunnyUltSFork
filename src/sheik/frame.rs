@@ -24,7 +24,7 @@ fn sheik_frame(fighter: &mut L2CFighterCommon) {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
 			let frame = MotionModule::frame(boma);
 			let end_frame = MotionModule::end_frame(boma);
-			if StatusModule::is_situation_changed(boma) && [*FIGHTER_SHEIK_STATUS_KIND_SPECIAL_N_LOOP, *FIGHTER_SHEIK_STATUS_KIND_SPECIAL_N_SHOOT, *FIGHTER_SHEIK_KIND_SPECIAL_N].contains(&status_kind) {
+			if StatusModule::is_situation_changed(boma) && [*FIGHTER_SHEIK_STATUS_KIND_SPECIAL_N_SHOOT].contains(&status_kind) {
 				WorkModule::set_float(boma, 1.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
 			};
