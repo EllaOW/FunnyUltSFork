@@ -15,7 +15,7 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
+/*#[acmd_script(
     agent = "miiswordsman",
     script =  "game_throwlw",
     category = ACMD_GAME,
@@ -37,7 +37,7 @@ unsafe fn sword_dthrow(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
-}
+}*/
 #[acmd_script( agent = "miiswordsman", script = "game_throwf", category = ACMD_GAME, low_priority )]
 unsafe fn sword_fthrow(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
@@ -135,7 +135,7 @@ unsafe fn sword_uthrow_eff(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		sword_dthrow,
+		/*sword_dthrow,*/
         sword_fthrow,
         sword_uthrow, sword_uthrow_eff, sword_uthrow_snd, sword_uthrow_expr
     );
