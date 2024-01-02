@@ -15,9 +15,9 @@ use crate::util::*;
 use super::*;
 pub fn install() {
 	smashline::install_acmd_scripts!(
-		seph_bthrow
-		seph_uthrow
-		seph_dthrow
+		seph_bthrow,
+		seph_uthrow,
+		seph_dthrow,
 		seph_stand_grab
 	);
 }
