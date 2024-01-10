@@ -745,7 +745,7 @@ unsafe fn jack_specialn1_ex(agent: &mut L2CAgentBase) {
 unsafe fn jack_upgun(agent: &mut L2CAgentBase) {
 	let ENTRY_ID = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     frame(agent.lua_state_agent, 1.0);
-	macros::FT_MOTION_RATE(agent, 0.8)
+	macros::FT_MOTION_RATE(agent, 0.8);
     if macros::is_excute(agent) {
 		if BATON_TYPE[ENTRY_ID] == 2 {
 			macros::ATTACK(agent, 0, 0, Hash40::new("gunl"), 3.0, 361, 75, 0, 5, 9.5, 0.0, 0.0, 6.0, Some(0.0), Some(0.0), Some(20.0), 0.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, -1, 0.0, 12, false, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_OBJECT);
