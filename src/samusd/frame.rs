@@ -24,6 +24,9 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			let frame = MotionModule::frame(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let situation_kind = StatusModule::situation_kind(boma);
+			let y_vel = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			let upbfallspeed = smash::phx::Vector3f { x: 1.0, y: 0.9, z: 1.0 };
+			let fallspeed = smash::phx::Vector3f { x: 1.0, y: 1.0, z: 1.0 };
 			if smash::app::sv_information::is_ready_go() == false {
 				HOLD[ENTRY_ID] = 0;
 				IS_HOLD[ENTRY_ID] = false;
@@ -50,9 +53,12 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			if COOLDOWN[ENTRY_ID] > 0 {
 				COOLDOWN[ENTRY_ID] -= 1;
 			};
-			if ArticleModule::is_exist(boma, *WEAPON_KIND_SAMUSD_MISSILE) == false && IS_ALLOWED[ENTRY_ID] == false && COOLDOWN[ENTRY_ID] == 0 && END[ENTRY_ID] == false {
+			if ArticleModule::is_exist(boma, *FIGHTER_SAMUSD_GENERATE_ARTICLE_MISSILE) == false && IS_ALLOWED[ENTRY_ID] == false && COOLDOWN[ENTRY_ID] == 0 && END[ENTRY_ID] == false {
 				END[ENTRY_ID] = true;
 			};
+			if ArticleModule::is_exist(boma, *FIGHTER_SAMUSD_GENERATE_ARTICLE_MISSILE) {
+				CAN_SIDEB[ENTRY_ID] = 1;
+			}
 			if COOLDOWN[ENTRY_ID] > 0 &&  COOLDOWN[ENTRY_ID] < 5{
 					let m1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_smash_flash"), smash::phx::Hash40::new("haver"), &HANDS, &HANDS, 0.325, true, 0, 0, 0, 0, 0, true, true) as u32;
 					let m2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_smash_flash"), smash::phx::Hash40::new("havel"), &HANDS, &HANDS, 0.325, true, 0, 0, 0, 0, 0, true, true) as u32;
@@ -70,6 +76,15 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			} else {
 				CAN_SIDEB[ENTRY_ID] = 0;
 			};
+			if status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL || status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI && y_vel < 0.0 {
+				KineticModule::mul_speed(boma, &upbfallspeed, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+			}
+			else {
+				KineticModule::mul_speed(boma, &fallspeed, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+			};
+			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G {
+				CAN_SIDEB[ENTRY_ID] = 1;
+			}
 			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G {
 				if MotionModule::frame(boma) >= 18.0 && MotionModule::frame(boma) <= 20.0 {
 					IS_HOLD[ENTRY_ID] = true;
@@ -78,7 +93,7 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 					IS_ALLOWED[ENTRY_ID] = false;
 					CancelModule::enable_cancel(boma);
 				};
-				MotionModule::set_rate(fighter.module_accessor, 1.5);
+				MotionModule::set_rate(fighter.module_accessor, 1.5); 
 			};
 			/*
 			if IS_ALLOWED[ENTRY_ID] == false {
