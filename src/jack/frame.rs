@@ -111,19 +111,26 @@ fn joker_frame(fighter: &mut L2CFighterCommon) {
 			if ![*FIGHTER_STATUS_KIND_APPEAL, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) && smash::app::sv_information::is_ready_go(){
 				ArticleModule::remove_exist(boma, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
-			if GUN_C[ENTRY_ID] != NONE && status_kind == *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_ESCAPE {
+			if GUN_C[ENTRY_ID] == ATTACK_AIR_N  && status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
 				if MotionModule::frame(boma) < 20.0 {
-					MotionModule::set_rate(boma, 2.0);
+					MotionModule::set_rate(boma, 2.5);
 				} else {
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};
-			if [*FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_ESCAPE].contains(&status_kind) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT){
+			if [*FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_ESCAPE, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_BARRAGE, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_LANDING].contains(&status_kind) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT){
 				if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 {
 					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
 					} else {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DASH, true);
+					};
+				};
+				if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH) != 0 {
+					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
+					} else {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_TURN_DASH, true);
 					};
 				};
 				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
@@ -140,33 +147,35 @@ fn joker_frame(fighter: &mut L2CFighterCommon) {
 				};
 			};
 			if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_ANY) != 0 && (WorkModule::is_flag(boma, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) == false || AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) == false){
-				if status_kind == *FIGHTER_STATUS_KIND_ATTACK {
+				/*if status_kind == *FIGHTER_STATUS_KIND_ATTACK {
 					GUN_C[ENTRY_ID] = ATTACK_N;
 					macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x15e858a896), true, true);
 					macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x0a38380378), true, true);
 					macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x0f6ac1c8de), true, true);
 					macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x17a5cc8181), true, true);
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);
-				};
+				};*/
 				if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S3 {
 					GUN_C[ENTRY_ID] = ATTACK_S3;
-					PostureModule::reverse_lr(boma);
-					PostureModule::update_rot_y_lr(boma);
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_ESCAPE, true);
-				};
-				if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S4 {
-					GUN_C[ENTRY_ID] = ATTACK_S4;
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);
 				};
+				/*if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S4 {
+					GUN_C[ENTRY_ID] = ATTACK_S4;
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);
+				};*/
 				if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
 					if motion_kind == hash40("attack_air_f") {
 						GUN_C[ENTRY_ID] = ATTACK_AIR_F;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);
 					};
-					if motion_kind == hash40("attack_air_b") {
+					if motion_kind == hash40("attack_air_n") {
+						GUN_C[ENTRY_ID] = ATTACK_AIR_N;
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);
+					};
+					/*if motion_kind == hash40("attack_air_b") {
 						GUN_C[ENTRY_ID] = ATTACK_AIR_B;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_ESCAPE, true);
-					};
+					};*/
 					if motion_kind == hash40("attack_air_hi") {
 						GUN_C[ENTRY_ID] = ATTACK_AIR_HI;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);

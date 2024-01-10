@@ -16,7 +16,6 @@ use crate::jack::*;
 use super::*;
 pub fn install() {
     smashline::install_acmd_scripts!(
-		joker_fsmash,
 		joker_usmash
     );
 }
