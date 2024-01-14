@@ -20,6 +20,7 @@ pub const ATTACK_AIR_LW : i32 = 115;
 //Joker Gun Cancel 
 static mut GUN_C: [i32; 8] = [100; 8];
 static mut IS_ARSENE: [bool; 8] = [false; 8];
+static mut CANCEL: [bool; 8] = [false; 8];
 static mut X: [f32; 8] = [0.0; 8];
 static mut Y: [f32; 8] = [0.0; 8];
 static mut BATON_TYPE: [i32; 8] = [0; 8];
