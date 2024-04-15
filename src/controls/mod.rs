@@ -6,6 +6,7 @@ pub mod singletons;
 pub mod modules;
 pub mod controls_2;
 pub use modules::*;
+use crate::util::*;
 use smash::hash40;
 
 use ext::*;
@@ -14,14 +15,14 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::*;
 use smash::lib::{*, lua_const::*};
 
-#[skyline::hook(offset = 0x16d948c, inline)]
+#[skyline::hook(offset = 0x16d85dc, inline)]
 unsafe fn packed_packet_creation(ctx: &mut skyline::hooks::InlineCtx) {
     // *ctx.registers[8].x.as_mut() |= 0xFC_00000000;
     *ctx.registers[22].x.as_mut() = 0x2;
     // println!("{:#x} | {:#x}", *ctx.registers[8].x.as_ref(), *ctx.registers[22].x.as_ref());
 }
 
-#[skyline::hook(offset = 0x16d94c0, inline)]
+#[skyline::hook(offset = 0x16d8610, inline)]
 unsafe fn write_packet(ctx: &mut skyline::hooks::InlineCtx) {
     let raw = *ctx.registers[19].x.as_ref();
 
@@ -140,19 +141,17 @@ unsafe fn map_controls_hook(
                 (x, gc_x,   FullHop, Buttons::FullHop | Buttons::Jump)
                 (y, gc_y,   FullHop, Buttons::FullHop | Buttons::Jump)
         );
-        /*
-        if (*mappings.add(player_idx as usize)).gc_absmash {
-            if (*out).buttons.contains(Buttons::Attack | Buttons::Special) {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-                (*out).buttons |= Buttons::Smash;
-                (*mappings.add(player_idx as usize)).is_absmash = true;
-            } else if !(*out).buttons.intersects(Buttons::Attack | Buttons::Special) {
-                (*mappings.add(player_idx as usize)).is_absmash = false;
-            } else if (*mappings.add(player_idx as usize)).is_absmash {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-            }
+        let mut set_num = 0;
+        let mut next_id = player_idx;
+        if (*mappings).gc_absmash & 1 != 0 {
+            IS_AB[player_idx as usize] = true;
+            //println!("{} to mode {}", next_id as usize, set_num);
+        } else {
+            IS_AB[player_idx as usize] = false;
+            //println!("{} to mode {}", next_id as usize, set_num);
         }
-        */
+        
+        
     } else if controller.style == ControllerStyle::LeftJoycon || controller.style == ControllerStyle::RightJoycon {
         (*out).buttons |= apply_button_mappings!(
             controller,
@@ -270,18 +269,16 @@ unsafe fn map_controls_hook(
                     (x, joy_right,  FullHop, Buttons::FullHop | Buttons::Jump)
             );
         }
-        /*
-        if (*mappings.add(player_idx as usize)).joy_absmash {
-            if (*out).buttons.contains(Buttons::Attack | Buttons::Special) {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-                (*out).buttons |= Buttons::Smash;
-                (*mappings.add(player_idx as usize)).is_absmash = true;
-            } else if !(*out).buttons.intersects(Buttons::Attack | Buttons::Special) {
-                (*mappings.add(player_idx as usize)).is_absmash = false;
-            } else if (*mappings.add(player_idx as usize)).is_absmash {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-            }
-        }*/
+        let mut set_num = 0;
+        let mut next_id = player_idx;
+        if (*mappings).joy_absmash & 1 != 0 {
+            IS_AB[player_idx as usize] = true;
+            //println!("{} to mode {}", next_id as usize, set_num);
+        } else {
+            IS_AB[player_idx as usize] = false;
+            //println!("{} to mode {}", next_id as usize, set_num);
+        }
+        
     } else {
         (*out).buttons |= apply_button_mappings!(
             controller,
@@ -331,18 +328,15 @@ unsafe fn map_controls_hook(
                 (x, pro_x,      FullHop, Buttons::FullHop | Buttons::Jump)
                 (y, pro_y,      FullHop, Buttons::FullHop | Buttons::Jump)
         );
-        /*
-        if (*mappings.add(player_idx as usize)).pro_absmash {
-            if (*out).buttons.contains(Buttons::Attack | Buttons::Special) {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-                (*out).buttons |= Buttons::Smash;
-                (*mappings.add(player_idx as usize)).is_absmash = true;
-            } else if !(*out).buttons.intersects(Buttons::Attack | Buttons::Special) {
-                (*mappings.add(player_idx as usize)).is_absmash = false;
-            } else if (*mappings.add(player_idx as usize)).is_absmash {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-            }
-        }*/
+        let mut set_num = 0;
+        let mut next_id = player_idx;
+        if (*mappings).pro_absmash & 1 != 0 {
+            IS_AB[player_idx as usize] = true;
+            //println!("{} to mode {}", next_id as usize, set_num);
+        } else {
+            IS_AB[player_idx as usize] = false;
+            //println!("{} to mode {}", next_id as usize, set_num);
+        }
     }
 
     // Check if the button combos are being pressed and then force Stock Share + AttackRaw/SpecialRaw depending on input
@@ -405,13 +399,13 @@ struct ControlModuleInternal {
 }
 
 unsafe fn get_mapped_controller_inputs(player: usize) -> &'static MappedInputs {
-    let base = *((skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x52c30f0) as *const u64);
+    let base = *((skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x52c50f0) as *const u64);
     &*((base + 0x2b8 + 0x8 * (player as u64)) as *const MappedInputs)
 }
 
 static mut LAST_ALT_STICK: [f32; 2] = [0.0, 0.0];
 
-#[skyline::hook(offset = 0x3f7220)]
+#[skyline::hook(offset = 0x3f7240)]
 unsafe fn parse_inputs(this: &mut ControlModuleInternal) {
     const NEUTRAL: f32 = 0.2;
     const CLAMP_MAX: f32 = 120.0;
@@ -444,7 +438,7 @@ unsafe fn parse_inputs(this: &mut ControlModuleInternal) {
     call_original!(this)
 }
 
-#[skyline::hook(offset = 0x6b9c5c, inline)]
+#[skyline::hook(offset = 0x6b9c7c, inline)]
 unsafe fn after_exec(ctx: &skyline::hooks::InlineCtx) {
     let module = *ctx.registers[19].x.as_ref();
     let internal_class = *(module as *const u64).add(0x110 / 0x8);

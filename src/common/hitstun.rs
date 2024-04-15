@@ -9,8 +9,25 @@ use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::*;
+use crate::util::*;
 
 
+#[fighter_frame_callback]
+pub fn kd_throw(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+        let status_kind = StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if [*FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL].contains(&status_kind) && IS_KD_THROW[ENTRY_ID] {
+            IS_KD_THROW[ENTRY_ID] = false;
+            KineticModule::clear_speed_all(boma);
+            fighter.clear_lua_stack();
+			lua_args!(fighter, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+			smash::app::sv_kinetic_energy::clear_speed(fighter.lua_state_agent);
+			macros::SET_SPEED_EX(fighter, 0, -WorkModule::get_param_float(boma, hash40("common"), hash40("air_speed_y_stable")), *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        }
+    }
+}
 #[fighter_frame_callback]
 pub fn non_tumble_di(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -20,10 +37,10 @@ pub fn non_tumble_di(fighter : &mut L2CFighterCommon) {
         let lua_state = fighter.lua_state_agent;
         let mut l2c_agent = L2CAgent::new(lua_state);
         if [*FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR].contains(&status_kind) {
-            println!("hitlag: {}", StopModule::get_hit_stop_real_frame(boma));
+            //println!("hitlag: {}", StopModule::get_hit_stop_real_frame(boma));
             if StopModule::get_hit_stop_real_frame(boma) as i32 == 1{
                 smash::lua2cpp::L2CFighterCommon::FighterStatusDamage__correctDamageVector(fighter);
-                println!("opff for hitstun being triggered");
+                //println!("opff for hitstun being triggered");
             }
             if [*FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR].contains(&status_kind)
                 && [*FIGHTER_STATUS_KIND_THROWN, *FIGHTER_STATUS_KIND_CLUNG_THROWN_DIDDY, *FIGHTER_STATUS_KIND_SHOULDERED_DONKEY_THROWN, *FIGHTER_STATUS_KIND_MIIFIGHTER_COUNTER_THROWN, *FIGHTER_STATUS_KIND_MIIFIGHTER_SUPLEX_THROWN, *FIGHTER_STATUS_KIND_SWING_GAOGAEN_THROWN].contains(&status_kind_prev) {
@@ -31,7 +48,7 @@ pub fn non_tumble_di(fighter : &mut L2CFighterCommon) {
                 let total_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
                 let hitstun_passed = total_hitstun - remaining_hitstun;
                 if total_hitstun > 0.0 && hitstun_passed == 1.0 {
-                    println!("opff for throwstun being triggered");
+                    //println!("opff for throwstun being triggered");
                     smash::lua2cpp::L2CFighterCommon::FighterStatusDamage__correctDamageVector(fighter);
                 }
             }
@@ -59,6 +76,6 @@ pub unsafe fn ftStatusUniqProcessDamage_exec_hook(fighter: &mut L2CFighterCommon
 
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(non_tumble_di);
+    smashline::install_agent_frame_callbacks!(non_tumble_di, kd_throw);
     skyline::install_hooks!(ftStatusUniqProcessDamage_exec_common_hook, ftStatusUniqProcessDamage_exec_hook);
 }
