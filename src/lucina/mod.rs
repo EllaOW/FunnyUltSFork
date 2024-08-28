@@ -28,7 +28,7 @@ static SWORDMASTER_DASH : f32 = 2.38;
 static SWORDMASTER_AIR_SPEED : f32 = 2.0;
 static SWORDMASTER_MAX_GRAVITY: f32 = 0.1;
 static HERO_SWORD_MULT : f32 = 1.15;
-static SWORDMASTER_SWORD_MULT : f32 = 0.85;
+static SWORDMASTER_SWORD_MULT : f32 = 0.95;
 
 static HERO_NAIR_LANDING : f32 = 9.0;
 static HERO_FAIR_LANDING : f32 = 13.0;
@@ -37,10 +37,10 @@ static HERO_UAIR_LANDING : f32 = 9.0;
 static HERO_DAIR_LANDING : f32 = 16.0;
 
 static SWORD_NAIR_LANDING : f32 = 9.0;
-static SWORD_FAIR_LANDING : f32 = 10.0;
+static SWORD_FAIR_LANDING : f32 = 8.0;
 static SWORD_BAIR_LANDING : f32 = 6.0;
 static SWORD_UAIR_LANDING : f32 = 8.0;
-static SWORD_DAIR_LANDING : f32 = 14.0;
+static SWORD_DAIR_LANDING : f32 = 12.0;
 /*
 Base Lucina Landing Lag Stats for reference:
 <float hash="landing_attack_air_frame_n">9</float>
