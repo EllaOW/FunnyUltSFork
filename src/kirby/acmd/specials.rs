@@ -17,49 +17,49 @@ use crate::kirby::*;
 
 pub fn install() {
     Agent::new("kirby")
-    .acmd("game_specialhi", kirby_upb1)    
-	.acmd("game_specialairhi", kirby_upb1)    
-	.acmd("sound_specialhi4", kirby_upb4_sound)    
-	.acmd("expression_specialhi4", kirby_upb4_exp)    
-	.acmd("game_specialhi4", kirby_upb4)    
-	.acmd("effect_specialairhi2", kirby_air_upb2_effect)    
-	.acmd("game_specialairhi2", kirby_air_upb2)    
-	.acmd("sound_specialairhi2", kirby_upb2_sound)    
-	.acmd("game_speciallw", kirby_ground_downb)    
-	.acmd("effect_speciallw", kirby_ground_downb_eff)    
-	.acmd("sound_speciallw", kirby_ground_downb_snd)    
-	.acmd("game_speciallw2", kirby_ground_downb2)    
-	.acmd("effect_speciallw2", kirby_ground_downb2_eff)    
-	.acmd("sound_speciallw2", kirby_ground_downb2_snd)    
-	.acmd("game_specialairlw2", kirby_downb_end_air)    
-	.acmd("game_specialsstart", kirby_sideb_start)    
-	.acmd("game_specialairsstart", kirby_sideb_start)    
-	.acmd("game_specials", kirby_sideb)    
-	.acmd("game_specialairs", kirby_sideb)    
-	.acmd("game_specialss", kirby_sideb)    
-	.acmd("game_specialairss", kirby_sideb)    
-	.acmd("effect_specials", kirby_sideb_eff)    
-	.acmd("effect_specialairs", kirby_sideb_eff)    
-	.acmd("effect_specialss", kirby_sideb_eff)    
-	.acmd("effect_specialairss", kirby_sideb_eff)    
-	.acmd("sound_specials", kirby_sideb_snd)    
-	.acmd("sound_specialairs", kirby_sideb_snd)    
-	.acmd("sound_specialss", kirby_sideb_snd)    
-	.acmd("sound_specialairss", kirby_sideb_snd)    
-	.acmd("expression_specials", kirby_sideb_expr)    
-	.acmd("expression_specialairs", kirby_sideb_expr)    
-	.acmd("expression_specialss", kirby_sideb_expr)    
-	.acmd("expression_specialairss", kirby_sideb_expr)    
-	.acmd("sound_specialhi", kirby_upb_sound)    
-	.acmd("sound_specialairhi", kirby_upb_sound)    
-    .acmd("game_specialinput", kirby_special_input)    
-	.acmd("sound_specialinput", kirby_special_input_snd)    
-    .acmd("effect_specialinput", kirby_special_input_eff)    
+    .acmd("game_specialhi", kirby_upb1, Priority::Low)    
+	.acmd("game_specialairhi", kirby_upb1, Priority::Low)    
+	.acmd("sound_specialhi4", kirby_upb4_sound, Priority::Low)    
+	.acmd("expression_specialhi4", kirby_upb4_exp, Priority::Low)    
+	.acmd("game_specialhi4", kirby_upb4, Priority::Low)    
+	.acmd("effect_specialairhi2", kirby_air_upb2_effect, Priority::Low)    
+	.acmd("game_specialairhi2", kirby_air_upb2, Priority::Low)    
+	.acmd("sound_specialairhi2", kirby_upb2_sound, Priority::Low)    
+	.acmd("game_speciallw", kirby_ground_downb, Priority::Low)    
+	.acmd("effect_speciallw", kirby_ground_downb_eff, Priority::Low)    
+	.acmd("sound_speciallw", kirby_ground_downb_snd, Priority::Low)    
+	.acmd("game_speciallw2", kirby_ground_downb2, Priority::Low)    
+	.acmd("effect_speciallw2", kirby_ground_downb2_eff, Priority::Low)    
+	.acmd("sound_speciallw2", kirby_ground_downb2_snd, Priority::Low)    
+	.acmd("game_specialairlw2", kirby_downb_end_air, Priority::Low)    
+	.acmd("game_specialsstart", kirby_sideb_start, Priority::Low)    
+	.acmd("game_specialairsstart", kirby_sideb_start, Priority::Low)    
+	.acmd("game_specials", kirby_sideb, Priority::Low)    
+	.acmd("game_specialairs", kirby_sideb, Priority::Low)    
+	.acmd("game_specialss", kirby_sideb, Priority::Low)    
+	.acmd("game_specialairss", kirby_sideb, Priority::Low)    
+	.acmd("effect_specials", kirby_sideb_eff, Priority::Low)    
+	.acmd("effect_specialairs", kirby_sideb_eff, Priority::Low)    
+	.acmd("effect_specialss", kirby_sideb_eff, Priority::Low)    
+	.acmd("effect_specialairss", kirby_sideb_eff, Priority::Low)    
+	.acmd("sound_specials", kirby_sideb_snd, Priority::Low)    
+	.acmd("sound_specialairs", kirby_sideb_snd, Priority::Low)    
+	.acmd("sound_specialss", kirby_sideb_snd, Priority::Low)    
+	.acmd("sound_specialairss", kirby_sideb_snd, Priority::Low)    
+	.acmd("expression_specials", kirby_sideb_expr, Priority::Low)    
+	.acmd("expression_specialairs", kirby_sideb_expr, Priority::Low)    
+	.acmd("expression_specialss", kirby_sideb_expr, Priority::Low)    
+	.acmd("expression_specialairss", kirby_sideb_expr, Priority::Low)    
+	.acmd("sound_specialhi", kirby_upb_sound, Priority::Low)    
+	.acmd("sound_specialairhi", kirby_upb_sound, Priority::Low)    
+    .acmd("game_specialinput", kirby_special_input, Priority::Low)    
+	.acmd("sound_specialinput", kirby_special_input_snd, Priority::Low)    
+    .acmd("effect_specialinput", kirby_special_input_eff, Priority::Low)    
 	.install();
 
 	Agent::new("kirby_finalcuttershot")
-	.acmd("effect_finalcutterregular", kirby_beam_eff)    
-    .acmd("game_finalcutterregular", kirby_beam)    
+	.acmd("effect_finalcutterregular", kirby_beam_eff, Priority::Low)    
+    .acmd("game_finalcutterregular", kirby_beam, Priority::Low)    
     .install();
 }
 
@@ -129,13 +129,20 @@ unsafe extern "C" fn kirby_air_upb2(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.8, /*Angle*/ 90, /*KBG*/ 100, /*FKB*/ 80, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.7, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 2, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.8, /*Angle*/ 90, /*KBG*/ 100, /*FKB*/ 80, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.7, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 2, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.8, /*Angle*/ 90, /*KBG*/ 100, /*FKB*/ 150, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.7, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 2, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.8, /*Angle*/ 90, /*KBG*/ 100, /*FKB*/ 150, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.7, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 2, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
 		}
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.8, /*Angle*/ 367, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 2, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.8, /*Angle*/ 367, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 2, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+			AttackModule::clear_all(fighter.module_accessor);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.4, /*Angle*/ 90, /*KBG*/ 100, /*FKB*/ 100, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.2, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.4, /*Angle*/ 90, /*KBG*/ 100, /*FKB*/ 100, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.2, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+		}
+		frame(fighter.lua_state_agent, 4.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.4, /*Angle*/ 367, /*KBG*/ 100, /*FKB*/ 100, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.2, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.4, /*Angle*/ 367, /*KBG*/ 100, /*FKB*/ 100, /*BKB*/ 0, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 4.9, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(7.9), /*Hitlag*/ 0.2, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
 		}
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {

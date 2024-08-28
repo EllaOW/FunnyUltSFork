@@ -16,11 +16,11 @@ use super::*;
 
 pub fn install() {
     Agent::new("dedede")
-    .acmd("game_attackhi3", d3_utilt)    
-    .acmd("game_attacks3", d3_ftilt)    
-    .acmd("game_attacklw3", d3_dtilt)    
-    .acmd("effect_attacklw3", d3_dtilt_eff)    
-    .acmd("expression_attacklw3", d3_dtilt_exp)    
+    .acmd("game_attackhi3", d3_utilt, Priority::Low)    
+    .acmd("game_attacks3", d3_ftilt, Priority::Low)    
+    .acmd("game_attacklw3", d3_dtilt, Priority::Low)    
+    .acmd("effect_attacklw3", d3_dtilt_eff, Priority::Low)    
+    .acmd("expression_attacklw3", d3_dtilt_exp, Priority::Low)    
     .install();
 }	
 
@@ -97,8 +97,13 @@ unsafe extern "C" fn d3_dtilt_eff(fighter: &mut L2CAgentBase) {
 	
 	
 }	
-unsafe extern "C" fn d3_dtilt_exp(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-	
-	
-}	
+unsafe extern "C" fn d3_dtilt_exp(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 14.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitl"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackl"), 0);
+    }
+}

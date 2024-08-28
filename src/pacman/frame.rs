@@ -65,7 +65,7 @@ unsafe extern "C" fn pacman_frame(fighter: &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN, false);
 				HAS_UPB_ENDS[ENTRY_ID] = true;
 			}
-			if situation_kind != *SITUATION_KIND_AIR {
+			if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) || StopModule::is_damage(boma) {
 				HAS_UPB_ENDS[ENTRY_ID] = false;
 				WorkModule::off_flag(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_SPECIAL_HI_FALL);
 			}
@@ -85,6 +85,19 @@ unsafe extern "C" fn pacman_frame(fighter: &mut L2CFighterCommon) {
 				if frame > 41.0{
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
 				}
+			}
+			if [hash40("special_lw_failure"), hash40("special_air_lw_failure")].contains(&motion_kind) {
+				if StatusModule::is_situation_changed(boma) && situation_kind == *SITUATION_KIND_GROUND{
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+					WorkModule::set_float(boma, 25.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
+				};
+				if situation_kind == *SITUATION_KIND_AIR && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 49.0{
+					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
+					MotionModule::set_frame_sync_anim_cmd(boma, 50.0, true, true, false);
+					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+						MotionModule::set_rate(boma, 0.5);
+					};
+				};
 			}
 		}
 		//println!("Jump num: {}", WorkModule::get_int(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_SPECIAL_HI_JUMP_NUM));

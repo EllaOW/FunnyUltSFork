@@ -18,7 +18,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("reflet")
-    .acmd("game_attackairn", robin_nair)    
+    .acmd("game_attackairn", robin_nair, Priority::Low)    
     .install();
 }
 
@@ -65,13 +65,6 @@ unsafe extern "C" fn robin_nair(agent: &mut L2CAgentBase) {
                     VisibilityModule::set_int64(agent.module_accessor, hash40("sword") as i64, hash40("sword_normal") as i64);
                     WorkModule::off_flag(agent.module_accessor, *FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_THUNDER_SWORD_ON);
                 }
-            }
-        }
-        frame(agent.lua_state_agent, 42.0);
-        if macros::is_excute(agent) {
-            let object = sv_system::battle_object(agent.lua_state_agent) as *mut BattleObject;
-            if !object.is_null() {
-                FighterSpecializer_Reflet::throwaway_sword(object as *mut Fighter, Vector2f{x: -3.0, y: 17.0}, true);
             }
         }
     }

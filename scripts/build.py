@@ -1,6 +1,18 @@
 import os
 import shutil
+import sys
 from zipfile import ZipFile
+import subprocess
+
+try:
+    inputs = ("".join(sys.argv)).lower()
+    inputs = inputs.replace('build.py', "")
+    inputs = inputs.replace('\n', "")
+    print(inputs)
+except IndexError:
+    raise Exception("No version inputted!")
+
+inputs = inputs.replace('build.py ', "")
 
 def copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
@@ -11,10 +23,7 @@ def copytree(src, dst, symlinks=False, ignore=None):
         else:
             shutil.copy2(s, d)
 
-stream = os.popen('cargo skyline build --release --features="main_nro"')
-output = stream.read()
-output
-os.chdir('../')
+subprocess.run('cargo skyline build --release --features="main_nro"', shell=True)
 print(os.getcwd())
 old = r"target\aarch64-skyline-switch\release\libplugin.nro"
 new = r"releases/ultimate/mods/Ultimate S Arcropolis"
@@ -49,7 +58,7 @@ def get_all_file_paths(directory):
     return file_paths       
 
 print("Finished Building... now compiling Romfs")
-
+print(os.chdir(".."))
 if os.path.exists(r'target'):
     os.chdir(r'target')
     print(os.listdir())
@@ -80,6 +89,16 @@ if os.path.exists(r'target'):
                 print("Copying from romfs finished, now zipping")
             else:
                 print("Error! No romfs folder! Please check your install")
+
+            #Version Text
+            f = open(r'releases/ultimate/mods/Ultimate S Arcropolis/version.txt',"w")
+            f.write(f"v.{inputs}")
+            f.close()
+            shutil.copy(r'readme.txt', r'releases/readme.txt')
+            shutil.copy(r'Ultimate S Setup Tool.exe', r'releases/Ultimate S Setup Tool.exe')
+            shutil.copy(r'Ultimate S Setup Tool.py', r'releases/Ultimate S Setup Tool.py')
+            shutil.copytree(r'resources', r'releases/resources')
+
             if os.path.exists(r'releases/Ultimate S Arcropolis.zip'):
                 os.remove(r'releases/Ultimate S Arcropolis.zip')
             file_paths = get_all_file_paths(new)

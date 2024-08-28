@@ -16,14 +16,14 @@ use super::*;
 
 pub fn install() {
     Agent::new("roy")
-    .acmd("game_attack11", roy_jab)    
-	.acmd("game_attackhi4", roy_usmash)    
-	.acmd("game_attackdash", roy_da)    
-	.acmd("game_attackdash2", roy_da2)    
-	.acmd("effect_attackdash2", roy_da2_eff)    
-	.acmd("effect_attackdash", roy_da_eff)    
-	.acmd("sound_attackdash2", roy_da2_snd)    
-	.acmd("sound_attackdash", roy_da_snd)    
+    .acmd("game_attack11", roy_jab, Priority::Low)    
+	.acmd("game_attackhi4", roy_usmash, Priority::Low)    
+	.acmd("game_attackdash", roy_da, Priority::Low)    
+	.acmd("game_attackdash2", roy_da2, Priority::Low)    
+	.acmd("effect_attackdash2", roy_da2_eff, Priority::Low)    
+	.acmd("effect_attackdash", roy_da_eff, Priority::Low)    
+	.acmd("sound_attackdash2", roy_da2_snd, Priority::Low)    
+	.acmd("sound_attackdash", roy_da_snd, Priority::Low)    
 	.install();
 }
 
@@ -90,11 +90,11 @@ unsafe extern "C" fn roy_da(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 8.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 6.0, /*Angle*/ 35, /*KBG*/ 100, /*FKB*/ 90, /*BKB*/ 0, /*Size*/ 3.0, /*X*/ -4.0, /*Y*/ 0.0, /*Z*/ 1.5, /*X2*/ Some(5.0), /*Y2*/ Some(0.0), /*Z2*/ Some(1.5), /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ -1.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 6.0, /*Angle*/ 35, /*KBG*/ 100, /*FKB*/ 90, /*BKB*/ 0, /*Size*/ 3.0, /*X*/ -4.0, /*Y*/ 0.0, /*Z*/ 1.5, /*X2*/ Some(2.0), /*Y2*/ Some(0.0), /*Z2*/ Some(1.5), /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ -1.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
 		}
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 6.0, /*Angle*/ 35, /*KBG*/ 100, /*FKB*/ 85, /*BKB*/ 0, /*Size*/ 3.0, /*X*/ -4.0, /*Y*/ 0.0, /*Z*/ 1.5, /*X2*/ Some(5.0), /*Y2*/ Some(0.0), /*Z2*/ Some(1.5), /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ -1.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 6.0, /*Angle*/ 35, /*KBG*/ 100, /*FKB*/ 85, /*BKB*/ 0, /*Size*/ 3.0, /*X*/ -4.0, /*Y*/ 0.0, /*Z*/ 1.5, /*X2*/ Some(2.0), /*Y2*/ Some(0.0), /*Z2*/ Some(1.5), /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ -1.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
 		}
 		frame(fighter.lua_state_agent, 17.0);
 		if macros::is_excute(fighter) {

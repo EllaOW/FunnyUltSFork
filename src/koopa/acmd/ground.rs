@@ -16,24 +16,24 @@ use super::*;
 
 pub fn install() {
     Agent::new("koopa")
-    .acmd("game_attackdash", bowser_da)    
-    .acmd("effect_attackdash", bowser_da_eff)    
-    .acmd("sound_attackdash", bowser_da_snd)    
-    .acmd("expression_attackdash", bowser_da_expr)    
-    .acmd("game_attacks4", bowser_fsmash)    
-    .acmd("effect_attacks4", bowser_fsmash_eff)    
-    .acmd("sound_attacks4", bowser_fsmash_snd)    
+    .acmd("game_attackdash", bowser_da, Priority::Low)    
+    .acmd("effect_attackdash", bowser_da_eff, Priority::Low)    
+    .acmd("sound_attackdash", bowser_da_snd, Priority::Low)    
+    .acmd("expression_attackdash", bowser_da_expr, Priority::Low)    
+    .acmd("game_attacks4", bowser_fsmash, Priority::Low)    
+    .acmd("effect_attacks4", bowser_fsmash_eff, Priority::Low)    
+    .acmd("sound_attacks4", bowser_fsmash_snd, Priority::Low)    
     .install();
 }
 
 unsafe extern "C" fn bowser_da(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 15.0);
+		frame(fighter.lua_state_agent, 16.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("handr"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 70, 6.0, 3.5, -0.6, 0.5, None, None, None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_PUNCH);
 			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 70, 5.0, 0.0, 0.0, 0.5, None, None, None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_PUNCH);
 		}
-		wait(fighter.lua_state_agent, 3.0);
+		wait(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}

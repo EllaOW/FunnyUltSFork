@@ -18,24 +18,25 @@ use crate::donkey::*;
 
 pub fn install() {
 	Agent::new("donkey")
-    .acmd("game_specialairlw", dk_air_downb)    
-    .acmd("game_specialairs", dk_sideb)    
-    .acmd("game_specials", dk_sideb)    
-    .acmd("game_specialairhi", dk_upb)    
-    .acmd("game_specialhi", dk_upb)    
-    .acmd("effect_specialairhi", dk_upb_eff)    
-    .acmd("effect_specialhi", dk_upb_eff)    
-    .acmd("sound_specialairhi", dk_upb_snd)    
-    .acmd("sound_specialhi", dk_upb_snd)    
-    .acmd("game_specialhishoot", dk_upb_shoot)    
-    .acmd("effect_specialhishoot", dk_upb_shoot_eff)    
-    .acmd("sound_specialhishoot", dk_upb_shoot_snd)    
-    .acmd("effect_specialairs", dk_sideb_eff)    
-    .acmd("effect_specials", dk_sideb_eff)    
-    .acmd("sound_specialairs", dk_sideb_snd)    
-    .acmd("sound_specials", dk_sideb_snd)    
-    .acmd("expression_specialairs", dk_sideb_expr)    
-    .acmd("expression_specials", dk_sideb_expr)    
+    .acmd("game_specialairlw", dk_air_downb, Priority::Low)    
+    .acmd("game_specialairs", dk_sideb, Priority::Low)    
+    .acmd("game_specials", dk_sideb, Priority::Low)    
+    .acmd("game_specialairhi", dk_upb, Priority::Low)    
+    .acmd("game_specialhi", dk_upb, Priority::Low)    
+    .acmd("effect_specialairhi", dk_upb_eff, Priority::Low)    
+    .acmd("effect_specialhi", dk_upb_eff, Priority::Low)    
+    .acmd("sound_specialairhi", dk_upb_snd, Priority::Low)    
+    .acmd("sound_specialhi", dk_upb_snd, Priority::Low)    
+    .acmd("game_specialhishoot", dk_upb_shoot, Priority::Low)    
+    .acmd("effect_specialhishoot", dk_upb_shoot_eff, Priority::Low)   
+    .acmd("expression_specialhishoot", dk_upb_shoot_expr, Priority::Low)   
+    .acmd("sound_specialhishoot", dk_upb_shoot_snd, Priority::Low)    
+    .acmd("effect_specialairs", dk_sideb_eff, Priority::Low)    
+    .acmd("effect_specials", dk_sideb_eff, Priority::Low)    
+    .acmd("sound_specialairs", dk_sideb_snd, Priority::Low)    
+    .acmd("sound_specials", dk_sideb_snd, Priority::Low)    
+    .acmd("expression_specialairs", dk_sideb_expr, Priority::Low)    
+    .acmd("expression_specials", dk_sideb_expr, Priority::Low)    
     .install();
 }
 
@@ -68,12 +69,14 @@ unsafe extern "C" fn dk_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    macros::FT_MOTION_RATE(fighter, 1.06);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_BARREL), 0, 0, false, false);
         IS_DK_START_ITEM_CHUCK[ENTRY_ID] = true;
     }
     frame(fighter.lua_state_agent, 33.0);
+    macros::FT_MOTION_RATE(fighter, 1.0);
     if macros::is_excute(fighter) {
         ItemModule::throw_item(fighter.module_accessor, 22.5, 4.0, 1.0, 0, true, 0.0);
     } 
@@ -88,7 +91,7 @@ unsafe extern "C" fn dk_upb(fighter: &mut L2CAgentBase) {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
-        damage!(fighter, /*MSC=*/*MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, /*DamageThreshold=*/7);
+        damage!(fighter, /*MSC=*/*MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, /*DamageThreshold=*/4);
     }
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -123,7 +126,12 @@ unsafe extern "C" fn dk_upb_shoot(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::remove_item(boma, 0);
         notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 11.0, /*Angle*/ 45, /*KBG*/ 74, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 10.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 11.0, /*Angle*/ 45, /*KBG*/ 74, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
+    }
+} 
+unsafe extern "C" fn dk_upb_shoot_expr(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_explosion"), 20, false, *BATTLE_OBJECT_ID_INVALID as u32);
     }
 } 
 unsafe extern "C" fn dk_upb_shoot_eff(fighter: &mut L2CAgentBase) {
@@ -168,4 +176,8 @@ unsafe extern "C" fn dk_sideb_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+    frame(fighter.lua_state_agent, 33.0);
+    if macros::is_excute(fighter) {
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
 }

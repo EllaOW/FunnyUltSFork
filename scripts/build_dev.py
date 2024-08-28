@@ -2,6 +2,7 @@ import os
 import sys
 import shutil
 from zipfile import ZipFile
+import subprocess
 
 needed_folders = ["util", "common", "controls", "cpu"]
 all_folders = [""]
@@ -33,11 +34,11 @@ try:
 
 
     with open(r"src/lib.rs", 'w') as f:
-        for i in range(0,215):
+        for i in range(0,202):
             f.write(in_[i])
         for x in needed_folders:
             f.write(f"mod {x};\n")
-        for i in range(307,369):
+        for i in range(302,385):
             f.write(in_[i])
         for x in needed_folders:
             f.write(f"	{x}::install();\n")
@@ -60,9 +61,7 @@ try:
             else:
                 shutil.copy2(s, d)
 
-    stream = os.popen('cargo skyline build --release')
-    output = stream.read()
-    output
+    subprocess.run('cargo skyline build --release --features="main_nro"', shell=True)
     os.chdir('../')
     print(os.getcwd())
     old = r"target\aarch64-skyline-switch\release\libplugin.nro"

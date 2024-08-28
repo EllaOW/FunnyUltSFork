@@ -16,15 +16,17 @@ use super::*;
 
 pub fn install() {
     Agent::new("inkling")
-    .acmd("game_attackairf", ink_fair)    
-    .acmd("effect_attackairf", ink_fair_eff)    
-    .acmd("sound_attackairf", ink_fair_snd)    
-    .acmd("game_attackairhi", ink_uair)    
-    .acmd("effect_attackairhi", ink_uair_eff)    
-    .acmd("sound_attackairhi", ink_uair_sound)    
-    .acmd("game_attackairb", ink_bair)    
-    .acmd("game_attackairn", ink_nair)    
-    .acmd("game_attackairlw", ink_dair)    
+    .acmd("game_attackairf", ink_fair, Priority::Low)    
+    .acmd("effect_attackairf", ink_fair_eff, Priority::Low)    
+    .acmd("sound_attackairf", ink_fair_snd, Priority::Low)    
+    .acmd("expression_attackairf", ink_fair_expr, Priority::Low)    
+    .acmd("game_attackairhi", ink_uair, Priority::Low)    
+    .acmd("effect_attackairhi", ink_uair_eff, Priority::Low)    
+    .acmd("sound_attackairhi", ink_uair_sound, Priority::Low)    
+    .acmd("expression_attackairhi", ink_uair_expr, Priority::Low)    
+    .acmd("game_attackairb", ink_bair, Priority::Low)    
+    .acmd("game_attackairn", ink_nair, Priority::Low)    
+    .acmd("game_attackairlw", ink_dair, Priority::Low)    
     .install();
 }
 
@@ -40,7 +42,7 @@ unsafe extern "C" fn ink_fair(fighter: &mut L2CAgentBase) {
 		WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		if WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK) > 0.0 {
 			macros::SET_SPEED_EX(fighter, -1.2, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 10.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(13.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_WATER);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 7.5, /*X2*/ Some(0.0), /*Y2*/ Some(12.0), /*Z2*/ Some(15.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_WATER);
 			AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 0, 80.0);
 		}
 	}
@@ -52,6 +54,13 @@ unsafe extern "C" fn ink_fair(fighter: &mut L2CAgentBase) {
 	if macros::is_excute(fighter) {
 		WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 	}
+}		
+unsafe extern "C" fn ink_fair_expr(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_explosion"), 0);
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohit_explosion"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
 }		
 unsafe extern "C" fn ink_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -94,13 +103,8 @@ unsafe extern "C" fn ink_uair(fighter: &mut L2CAgentBase) {
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6666);
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("legl"), /*Damage*/ 6.0, /*Angle*/ 65, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 4.0, /*X*/ 8.0, /*Y*/ 0.0, /*Z*/ -1.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
 			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("legl"), /*Damage*/ 6.0, /*Angle*/ 65, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 4.0, /*X*/ 2.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
-			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("legl"), /*Damage*/ 6.0, /*Angle*/ 65, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 4.0, /*X*/ 6.0, /*Y*/ 0.0, /*Z*/ -5.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
 		}
-		wait(fighter.lua_state_agent, 2.0);
-		if macros::is_excute(fighter) {
-			AttackModule::clear(fighter.module_accessor, /*ID*/ 2, false);
-		}
-		wait(fighter.lua_state_agent, 5.0);
+		wait(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -110,6 +114,16 @@ unsafe extern "C" fn ink_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
+unsafe extern "C" fn ink_uair_expr(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
+}		
 unsafe extern "C" fn ink_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
@@ -160,7 +174,7 @@ unsafe extern "C" fn ink_nair(agent: &mut L2CAgentBase) {
 		macros::ATTACK(agent, 1, 0, Hash40::new("legl"), 3.5, 361, 65, 0, 35, 4.5, 6.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
 		macros::ATTACK(agent, 2, 0, Hash40::new("legr"), 3.5, 361, 65, 0, 35, 4.5, 6.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
 	}	
-	wait(agent.lua_state_agent, 5.0);
+	wait(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
     }

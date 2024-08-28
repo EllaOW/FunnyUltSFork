@@ -17,40 +17,40 @@ use super::*;
 
 pub fn install() {
 	Agent::new("miifighter")
-    .acmd("game_specialairlw2start", brawler_fj)    
-    .acmd("game_speciallw2start", brawler_fj)    
-    .acmd("game_specialn3", brawler_esk)    
-    .acmd("game_specialairn3", brawler_esk)    
-    .acmd("sound_specialn3", brawler_esk_s)    
-    .acmd("sound_specialairn3", brawler_esk_s)    
-    .acmd("effect_specialn3", brawler_esk_e)    
-    .acmd("effect_specialairn3", brawler_esk_e)    
-    .acmd("game_speciallw1", brawler_foot)    
-    .acmd("game_specialairlw1", brawler_foot_air)    
-    .acmd("effect_speciallw1", brawler_foot_eff)    
-    .acmd("sound_speciallw1", brawler_foot_snd)    
-    .acmd("sound_specialairlw1", brawler_foot_air_snd)    
-    .acmd("effect_specialairlw1", brawler_foot_air_eff)    
-    .acmd("game_specialairlw3", brawler_counter)    
-    .acmd("game_speciallw3", brawler_counter)    
-    .acmd("game_specialairhi11", brawler_sak_start)    
-    .acmd("game_specialhi11", brawler_sak_start)    
-    .acmd("game_specialhi14", brawler_sak_land)    
-    .acmd("game_specials1start", brawler_grounded_onslaught_start)    
-    .acmd("game_specialairs1start", brawler_air_onslaught_start)    
-    .acmd("game_specials1end", brawler_grounded_onslaught)    
-    .acmd("sound_specialairs1end", brawler_onslaught_snd)    
-    .acmd("sound_specials1end", brawler_onslaught_snd)    
-    .acmd("effect_specials1end", brawler_grounded_onslaught_eff)    
-    .acmd("game_specialairs1end", brawler_air_onslaught)    
-    .acmd("expression_specialairs1end", brawler_onslaught_expr)    
-    .acmd("expression_specials1end", brawler_onslaught_expr)    
-    .acmd("effect_specialairs1end", brawler_air_onslaught_eff)    
+    .acmd("game_specialairlw2start", brawler_fj, Priority::Low)    
+    .acmd("game_speciallw2start", brawler_fj, Priority::Low)    
+    .acmd("game_specialn3", brawler_esk, Priority::Low)    
+    .acmd("game_specialairn3", brawler_esk, Priority::Low)    
+    .acmd("sound_specialn3", brawler_esk_s, Priority::Low)    
+    .acmd("sound_specialairn3", brawler_esk_s, Priority::Low)    
+    .acmd("effect_specialn3", brawler_esk_e, Priority::Low)    
+    .acmd("effect_specialairn3", brawler_esk_e, Priority::Low)    
+    .acmd("game_speciallw1", brawler_foot, Priority::Low)    
+    .acmd("game_specialairlw1", brawler_foot_air, Priority::Low)    
+    .acmd("effect_speciallw1", brawler_foot_eff, Priority::Low)    
+    .acmd("sound_speciallw1", brawler_foot_snd, Priority::Low)    
+    .acmd("sound_specialairlw1", brawler_foot_air_snd, Priority::Low)    
+    .acmd("effect_specialairlw1", brawler_foot_air_eff, Priority::Low)    
+    .acmd("game_specialairlw3", brawler_counter, Priority::Low)    
+    .acmd("game_speciallw3", brawler_counter, Priority::Low)    
+    .acmd("game_specialairhi11", brawler_sak_start, Priority::Low)    
+    .acmd("game_specialhi11", brawler_sak_start, Priority::Low)    
+    .acmd("game_specialhi14", brawler_sak_land, Priority::Low)    
+    .acmd("game_specials1start", brawler_grounded_onslaught_start, Priority::Low)    
+    .acmd("game_specialairs1start", brawler_air_onslaught_start, Priority::Low)    
+    .acmd("game_specials1end", brawler_grounded_onslaught, Priority::Low)    
+    .acmd("sound_specialairs1end", brawler_onslaught_snd, Priority::Low)    
+    .acmd("sound_specials1end", brawler_onslaught_snd, Priority::Low)    
+    .acmd("effect_specials1end", brawler_grounded_onslaught_eff, Priority::Low)    
+    .acmd("game_specialairs1end", brawler_air_onslaught, Priority::Low)    
+    .acmd("expression_specialairs1end", brawler_onslaught_expr, Priority::Low)    
+    .acmd("expression_specials1end", brawler_onslaught_expr, Priority::Low)    
+    .acmd("effect_specialairs1end", brawler_air_onslaught_eff, Priority::Low)    
     .install();
 
 	Agent::new("miifighter_ironball")
-    .acmd("game_fly", brawler_shotput)    
-    .acmd("effect_fly", brawler_shotput_eff)    
+    .acmd("game_fly", brawler_shotput, Priority::Low)    
+    .acmd("effect_fly", brawler_shotput_eff, Priority::Low)    
     .install();
     
 }
@@ -494,8 +494,8 @@ unsafe extern "C" fn brawler_air_onslaught(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 11.0);
 	if macros::is_excute(agent) {
 		macros::SET_SPEED_EX(agent, 1.0, 1.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-		macros::ATTACK(agent, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("toel"), /*Damage*/ 13.0, /*Angle*/ 40, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
-		macros::ATTACK(agent, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("kneel"), /*Damage*/ 13.0, /*Angle*/ 40, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
+		macros::ATTACK(agent, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("toel"), /*Damage*/ 13.0, /*Angle*/ 361, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
+		macros::ATTACK(agent, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("kneel"), /*Damage*/ 13.0, /*Angle*/ 361, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
 	}
 	frame(agent.lua_state_agent, 15.0);
 	if macros::is_excute(agent) {

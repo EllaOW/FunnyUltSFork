@@ -17,9 +17,9 @@ use super::super::*;
 
 unsafe extern "C" fn rayman_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    frame(fighter.lua_state_agent, 7.0);
+    frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("bust"), 11.0, 361, 70, 0, 42, 8.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("bust"), 11.0, 361, 70, 0, 42, 6.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
     }
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
@@ -234,20 +234,20 @@ unsafe extern "C" fn rayman_slide_utilt_snd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
-        .game_acmd("game_attacks3rayman", rayman_ftilt)
-        .effect_acmd("effect_attacks3rayman", rayman_ftilt_eff)
-        .sound_acmd("sound_attacks3", rayman_ftilt_snd)
-        .game_acmd("game_attackhi3rayman", rayman_utilt)
-        .effect_acmd("effect_attackhi3rayman", rayman_utilt_eff)
-        .sound_acmd("sound_attackhi3rayman", rayman_utilt_snd)
-        .game_acmd("game_attacklw3rayman", rayman_dtilt)
-        .effect_acmd("effect_attacklw3rayman", rayman_dtilt_eff)
-        .sound_acmd("sound_attacklw3rayman", rayman_dtilt_snd)
-        .game_acmd("game_slideattacklw", rayman_slide_dtilt)
-        .effect_acmd("effect_slideattacklw", rayman_slide_dtilt_eff)
-        .sound_acmd("sound_slideattacklw", rayman_slide_dtilt_snd)
-        .game_acmd("game_slideattackhi", rayman_slide_utilt)
-        .effect_acmd("effect_slideattackhi", rayman_slide_utilt_eff)
-        .sound_acmd("sound_slideattackhi", rayman_slide_utilt_snd)
+        .game_acmd("game_attacks3rayman", rayman_ftilt, Priority::Low)
+        .effect_acmd("effect_attacks3rayman", rayman_ftilt_eff, Priority::Low)
+        .sound_acmd("sound_attacks3", rayman_ftilt_snd, Priority::Low)
+        .game_acmd("game_attackhi3rayman", rayman_utilt, Priority::Low)
+        .effect_acmd("effect_attackhi3rayman", rayman_utilt_eff, Priority::Low)
+        .sound_acmd("sound_attackhi3rayman", rayman_utilt_snd, Priority::Low)
+        .game_acmd("game_attacklw3rayman", rayman_dtilt, Priority::Low)
+        .effect_acmd("effect_attacklw3rayman", rayman_dtilt_eff, Priority::Low)
+        .sound_acmd("sound_attacklw3rayman", rayman_dtilt_snd, Priority::Low)
+        .game_acmd("game_slideattacklw", rayman_slide_dtilt, Priority::Low)
+        .effect_acmd("effect_slideattacklw", rayman_slide_dtilt_eff, Priority::Low)
+        .sound_acmd("sound_slideattacklw", rayman_slide_dtilt_snd, Priority::Low)
+        .game_acmd("game_slideattackhi", rayman_slide_utilt, Priority::Low)
+        .effect_acmd("effect_slideattackhi", rayman_slide_utilt_eff, Priority::Low)
+        .sound_acmd("sound_slideattackhi", rayman_slide_utilt_snd, Priority::Low)
         .install();
 }

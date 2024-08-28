@@ -205,12 +205,12 @@ unsafe extern "C" fn rayman_fsmash(fighter: &mut L2CAgentBase) {
 		}
 		frame(fighter.lua_state_agent, 17.0);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 15.0, /*Angle*/ 55, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.9, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_KICK);
+			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 14.0, /*Angle*/ 55, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.9, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_KICK);
 		}
 		frame(fighter.lua_state_agent, 18.0);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 18.5, /*Angle*/ 55, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_KICK);
-			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 15.0, /*Angle*/ 55, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.9, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_KICK);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 17.5, /*Angle*/ 55, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_KICK);
+			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 14.0, /*Angle*/ 55, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.9, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_KICK);
 		}
 		frame(fighter.lua_state_agent, 24.0);
 		if macros::is_excute(fighter) {
@@ -540,33 +540,33 @@ unsafe extern "C" fn rayman_slide_attack_snd(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
-        .game_acmd("game_attack11rayman", rayman_jab_1)
-        .effect_acmd("effect_attack11rayman", rayman_jab_1_eff)
-        .sound_acmd("sound_attack11rayman", rayman_jab_1_snd)
-        .game_acmd("game_attack12rayman", rayman_jab_2)
-        .effect_acmd("effect_attack12rayman", rayman_jab_2_eff)
-        .sound_acmd("sound_attack12rayman", rayman_jab_2_snd)
-        .game_acmd("game_attack13rayman", rayman_jab_3)
-        .effect_acmd("effect_attack13rayman", rayman_jab_3_eff)
-        .sound_acmd("sound_attack13rayman", rayman_jab_3_snd)
-        .game_acmd("game_attackhi4rayman", rayman_usmash)
-        .effect_acmd("effect_attackhi4rayman", rayman_usmash_eff)
-        .game_acmd("game_attacklw4rayman", rayman_dsmash)
-        .game_acmd("game_attacks4rayman", rayman_fsmash)
-        .effect_acmd("effect_attacks4rayman", rayman_fsmash_eff)
-        .effect_acmd("effect_attacks4chargerayman", rayman_fsmash_charge_eff)
-        .sound_acmd("sound_attacks4chargerayman", rayman_fsmash_charge_snd)
-        .effect_acmd("effect_attackhi4chargerayman", rayman_usmash_charge_eff)
-        .effect_acmd("effect_attacklw4chargerayman", rayman_dsmash_charge_eff)
-        .effect_acmd("effect_attacklw4rayman", rayman_dsmash_eff)
-        .sound_acmd("sound_attacklw4rayman", rayman_dsmash_snd)
-        .sound_acmd("sound_attacks4rayman", rayman_fsmash_snd)
-        .sound_acmd("sound_attackhi4rayman", rayman_usmash_snd)
-        .game_acmd("game_attackdashrayman", rayman_da)
-        .effect_acmd("effect_attackdashrayman", rayman_da_eff)
-        .sound_acmd("sound_attackdashrayman", rayman_da_snd)
-        .game_acmd("game_slideattack", rayman_slide_attack)
-        .effect_acmd("effect_slideattack", rayman_slide_attack_eff)
-        .sound_acmd("sound_slideattack", rayman_slide_attack_snd)
+        .game_acmd("game_attack11rayman", rayman_jab_1, Priority::Low)
+        .effect_acmd("effect_attack11rayman", rayman_jab_1_eff, Priority::Low)
+        .sound_acmd("sound_attack11rayman", rayman_jab_1_snd, Priority::Low)
+        .game_acmd("game_attack12rayman", rayman_jab_2, Priority::Low)
+        .effect_acmd("effect_attack12rayman", rayman_jab_2_eff, Priority::Low)
+        .sound_acmd("sound_attack12rayman", rayman_jab_2_snd, Priority::Low)
+        .game_acmd("game_attack13rayman", rayman_jab_3, Priority::Low)
+        .effect_acmd("effect_attack13rayman", rayman_jab_3_eff, Priority::Low)
+        .sound_acmd("sound_attack13rayman", rayman_jab_3_snd, Priority::Low)
+        .game_acmd("game_attackhi4rayman", rayman_usmash, Priority::Low)
+        .effect_acmd("effect_attackhi4rayman", rayman_usmash_eff, Priority::Low)
+        .game_acmd("game_attacklw4rayman", rayman_dsmash, Priority::Low)
+        .game_acmd("game_attacks4rayman", rayman_fsmash, Priority::Low)
+        .effect_acmd("effect_attacks4rayman", rayman_fsmash_eff, Priority::Low)
+        .effect_acmd("effect_attacks4chargerayman", rayman_fsmash_charge_eff, Priority::Low)
+        .sound_acmd("sound_attacks4chargerayman", rayman_fsmash_charge_snd, Priority::Low)
+        .effect_acmd("effect_attackhi4chargerayman", rayman_usmash_charge_eff, Priority::Low)
+        .effect_acmd("effect_attacklw4chargerayman", rayman_dsmash_charge_eff, Priority::Low)
+        .effect_acmd("effect_attacklw4rayman", rayman_dsmash_eff, Priority::Low)
+        .sound_acmd("sound_attacklw4rayman", rayman_dsmash_snd, Priority::Low)
+        .sound_acmd("sound_attacks4rayman", rayman_fsmash_snd, Priority::Low)
+        .sound_acmd("sound_attackhi4rayman", rayman_usmash_snd, Priority::Low)
+        .game_acmd("game_attackdashrayman", rayman_da, Priority::Low)
+        .effect_acmd("effect_attackdashrayman", rayman_da_eff, Priority::Low)
+        .sound_acmd("sound_attackdashrayman", rayman_da_snd, Priority::Low)
+        .game_acmd("game_slideattack", rayman_slide_attack, Priority::Low)
+        .effect_acmd("effect_slideattack", rayman_slide_attack_eff, Priority::Low)
+        .sound_acmd("sound_slideattack", rayman_slide_attack_snd, Priority::Low)
         .install();
 }

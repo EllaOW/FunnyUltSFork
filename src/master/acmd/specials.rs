@@ -17,166 +17,41 @@ use super::*;
 
 pub fn install() {
     Agent::new("master")
-    .acmd("sound_specialairsf", byleth_sideb_snd)    
-    .acmd("sound_specialsf", byleth_sideb_snd)    
-    .acmd("sound_specialairsfdash", byleth_sidebdash_snd)    
-    .acmd("sound_specialsfdash", byleth_sidebdash_snd)    
-    .acmd("game_specialsf", byleth_sideb)    
-    .acmd("game_specialairsf", byleth_sideb)    
-    .acmd("game_specialsfdash", byleth_sidebdash)    
-    .acmd("game_specialairsfdash", byleth_sidebdash)    
-    .acmd("effect_specialsf", byleth_sidebe)    
-    .acmd("effect_specialairsf", byleth_sidebe)    
-    .acmd("effect_specialsfdash", byleth_sidebedash)    
-    .acmd("effect_specialairsfdash", byleth_sidebedash)    
-    .acmd("game_specialsstart", byleth_sideb_start)    
-    .acmd("game_specialairsstart", byleth_sideb_start)    
-    .acmd("effect_specialsstart", byleth_sideb_starte)    
-    .acmd("effect_specialairsstart", byleth_sideb_starte)    
-    .acmd("game_specialn", byleth_neutralb)    
-    .acmd("game_specialairn", byleth_neutralb)    
-    .acmd("effect_specialn", byleth_neutralb_eff)    
-    .acmd("effect_specialairn", byleth_neutralb_eff)    
-    .acmd("sound_specialn", byleth_neutralb_snd)    
-    .acmd("sound_specialairn", byleth_neutralb_snd)    
-    .acmd("expression_specialairn", byleth_air_neutralb_exp)    
-    .acmd("game_specialnstart", byleth_neutralb_start)    
-    .acmd("game_specialairnstart", byleth_neutralb_start)    
-    .acmd("game_specialnmax", byleth_neutralbmax)    
-    .acmd("effect_specialnmax", byleth_neutralbmaxe)    
-    .acmd("sound_specialnmax", byleth_neutralbmaxs)    
-    .acmd("game_specialairnmax", byleth_neutralbmaxair)    
-    .acmd("effect_specialairnmax", byleth_neutralbmaxaire)    
-    .acmd("sound_specialairnmax", byleth_neutralbmaxairs)    
-    .acmd("game_speciallw", byleth_downb)    
-    .acmd("game_specialairlw", byleth_downb)    
+    .acmd("game_specialn", byleth_neutralb, Priority::Low)    
+    .acmd("game_specialairn", byleth_neutralb, Priority::Low)    
+    .acmd("effect_specialn", byleth_neutralb_eff, Priority::Low)    
+    .acmd("effect_specialairn", byleth_neutralb_eff, Priority::Low)    
+    .acmd("sound_specialn", byleth_neutralb_snd, Priority::Low)    
+    .acmd("sound_specialairn", byleth_neutralb_snd, Priority::Low)    
+    .acmd("expression_specialairn", byleth_air_neutralb_exp, Priority::Low)    
+    .acmd("game_specialnstart", byleth_neutralb_start, Priority::Low)    
+    .acmd("game_specialairnstart", byleth_neutralb_start, Priority::Low)    
+    .acmd("game_specialnmax", byleth_neutralbmax, Priority::Low)    
+    .acmd("effect_specialnmax", byleth_neutralbmaxe, Priority::Low)    
+    .acmd("sound_specialnmax", byleth_neutralbmaxs, Priority::Low)    
+    .acmd("game_specialairnmax", byleth_neutralbmaxair, Priority::Low)    
+    .acmd("effect_specialairnmax", byleth_neutralbmaxaire, Priority::Low)    
+    .acmd("sound_specialairnmax", byleth_neutralbmaxairs, Priority::Low)    
+    .acmd("game_speciallw", byleth_downb, Priority::Low)    
+    .acmd("game_specialairlw", byleth_downb, Priority::Low)    
     .install();
 
 	Agent::new("master_arrow1")
-    .acmd("effect_fly", byleth_arrow_effect)    
-    .acmd("game_fly", byleth_arrow)    
+    .acmd("effect_fly", byleth_arrow_effect, Priority::Low)    
+    .acmd("game_fly", byleth_arrow, Priority::Low)    
     .install();
 
 	Agent::new("master_axe")
-    .acmd("game_speciallw", axe_downb)    
-    .acmd("game_specialairlw", axe_downb)    
+    .acmd("game_speciallw", axe_downb, Priority::Low)    
+    .acmd("game_specialairlw", axe_downb, Priority::Low)    
     .install();
 
 	Agent::new("kirby")
-    .acmd("effect_masterspecialn", kirby_byleth_neutralb_eff)    
-    .acmd("effect_masterspecialairn", kirby_byleth_neutralb_eff)    
+    .acmd("effect_masterspecialn", kirby_byleth_neutralb_eff, Priority::Low)    
+    .acmd("effect_masterspecialairn", kirby_byleth_neutralb_eff, Priority::Low)    
     .install();
 }
-
-unsafe extern "C" fn byleth_sideb_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		if macros::is_excute(fighter) {
-			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_master_rnd_attack02"));
-		}
-		frame(fighter.lua_state_agent, 2.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_master_special_s04"));
-		}
-		frame(fighter.lua_state_agent, 25.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_master_cloth_ll03"));
-		}
-	}	
-unsafe extern "C" fn byleth_sidebdash_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		if macros::is_excute(fighter) {
-			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_master_rnd_attack02"));
-		}
-		frame(fighter.lua_state_agent, 2.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_master_special_s05"));
-		}
-		frame(fighter.lua_state_agent, 25.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_master_cloth_ll03"));
-		}
-	}				
-unsafe extern "C" fn byleth_sideb(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
-		frame(fighter.lua_state_agent, 10.0);
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
-		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ 7.5, /*Angle*/ 80, /*KBG*/ 36, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -1.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("sword1"), /*Damage*/ 7.5, /*Angle*/ 80, /*KBG*/ 36, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.5, /*X*/ 3.0, /*Y*/ 1.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-			macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("sword1"), /*Damage*/ 7.5, /*Angle*/ 80, /*KBG*/ 36, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.5, /*X*/ 7.0, /*Y*/ 1.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-			macros::ATTACK(fighter, /*ID*/ 4, /*Part*/ 0, /*Bone*/ Hash40::new("sword1"), /*Damage*/ 7.5, /*Angle*/ 80, /*KBG*/ 36, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.5, /*X*/ 13.5, /*Y*/ 1.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-		}	
-		frame(fighter.lua_state_agent, 15.0);
-		if macros::is_excute(fighter) {
-			AttackModule::clear_all(fighter.module_accessor);
-		}
-	}		
-unsafe extern "C" fn byleth_sidebdash(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
-		frame(fighter.lua_state_agent, 2.0);
-		if macros::is_excute(fighter) {
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MASTER_STATUS_SPECIAL_S_FLAG_SPEED_UP_REQUEST);
-		}
-		frame(fighter.lua_state_agent, 10.0);
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
-		if macros::is_excute(fighter) {
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MASTER_STATUS_SPECIAL_S_FLAG_SPEED_DOWN_REQUEST);
-			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ 7.5, /*Angle*/ 80, /*KBG*/ 36, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -1.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("sword1"), /*Damage*/ 7.5, /*Angle*/ 80, /*KBG*/ 36, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.5, /*X*/ 3.0, /*Y*/ 1.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-			macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("sword1"), /*Damage*/ 7.5, /*Angle*/ 80, /*KBG*/ 36, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.5, /*X*/ 7.0, /*Y*/ 1.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-			macros::ATTACK(fighter, /*ID*/ 4, /*Part*/ 0, /*Bone*/ Hash40::new("sword1"), /*Damage*/ 7.5, /*Angle*/ 80, /*KBG*/ 36, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.5, /*X*/ 13.5, /*Y*/ 1.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-		}	
-		frame(fighter.lua_state_agent, 15.0);
-		if macros::is_excute(fighter) {
-			AttackModule::clear_all(fighter.module_accessor);
-			KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
-		}
-	}			
-unsafe extern "C" fn byleth_sidebe(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 10.0);
-		if macros::is_excute(fighter) {
-			macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new_raw(0x11c86cd79d), Hash40::new_raw(0x1151658627), 5, Hash40::new("sword1"), 2.3, 0.0, 0.0, Hash40::new("sword1"), 17.0, 0.0, 0.15, true, Hash40::new("null"), Hash40::new("sword1"), 0.0, 0.0, 0.0, 0.0, 0.0, -90.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
-			macros::EFFECT_FOLLOW(fighter, Hash40::new_raw(0x118d3781c4), Hash40::new("sword1"), 0, 0, 0, 0, 0, -90, 1, true);
-		}
-		frame(fighter.lua_state_agent, 18.0);
-		if macros::is_excute(fighter) {
-			macros::AFTER_IMAGE_OFF(fighter, 5);
-		}
-		frame(fighter.lua_state_agent, 20.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x118d3781c4), false, true);
-		}
-	}	
-unsafe extern "C" fn byleth_sidebedash(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 2.0);
-		if macros::is_excute(fighter) {
-			macros::FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
-		}
-		frame(fighter.lua_state_agent, 10.0);
-		if macros::is_excute(fighter) {
-			macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new_raw(0x11c86cd79d), Hash40::new_raw(0x1151658627), 5, Hash40::new("sword1"), 2.3, 0.0, 0.0, Hash40::new("sword1"), 17.0, 0.0, 0.15, true, Hash40::new("null"), Hash40::new("sword1"), 0.0, 0.0, 0.0, 0.0, 0.0, -90.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
-			macros::EFFECT_FOLLOW(fighter, Hash40::new_raw(0x118d3781c4), Hash40::new("sword1"), 0, 0, 0, 0, 0, -90, 1, true);
-		}
-		frame(fighter.lua_state_agent, 18.0);
-		if macros::is_excute(fighter) {
-			macros::AFTER_IMAGE_OFF(fighter, 5);
-		}
-		frame(fighter.lua_state_agent, 20.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x118d3781c4), false, true);
-		}
-	}		
-unsafe extern "C" fn byleth_sideb_start(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
-	}						
-unsafe extern "C" fn byleth_sideb_starte(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-	}				
+		
 unsafe extern "C" fn byleth_arrow_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		for _ in 0..10 {
@@ -197,7 +72,7 @@ unsafe extern "C" fn byleth_arrow_effect(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn byleth_arrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 9.0, /*Angle*/ 361, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -1.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L,  /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_OBJECT);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 7.0, /*Angle*/ 361, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -1.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L,  /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_OBJECT);
 			AttackModule::enable_safe_pos(fighter.module_accessor);
 		}
 	}							

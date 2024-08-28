@@ -192,7 +192,7 @@ unsafe extern "C" fn rayman_dair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 33.0);
 	macros::FT_MOTION_RATE(fighter, 1.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 10.0, 361, 100, 0, 25, 12.0, 0.0, 0.0, 0.0, None, None, None, 1.1, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 10.0, 361, 100, 0, 25, 9.0, 0.0, 0.0, 0.0, None, None, None, 1.1, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
     }
     wait(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -297,20 +297,20 @@ unsafe extern "C" fn rayman_uair_snd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
-        .game_acmd("game_attackairfrayman", rayman_fair)
-        .effect_acmd("effect_attackairfrayman", rayman_fair_eff)
-        .sound_acmd("sound_attackairfrayman", rayman_fair_snd)
-        .game_acmd("game_attackairnrayman", rayman_nair)
-        .effect_acmd("effect_attackairnrayman", rayman_nair_eff)
-        .sound_acmd("sound_attackairnrayman", rayman_nair_snd)
-        .game_acmd("game_attackairbrayman", rayman_bair)
-        .effect_acmd("effect_attackairbrayman", rayman_bair_eff)
-        .sound_acmd("sound_attackairbrayman", rayman_bair_snd)
-        .game_acmd("game_attackairlwrayman", rayman_dair)
-        .effect_acmd("effect_attackairlwrayman", rayman_dair_eff)
-        .sound_acmd("sound_attackairlwrayman", rayman_dair_snd)
-        .game_acmd("game_attackairhirayman", rayman_uair)
-        .effect_acmd("effect_attackairhirayman", rayman_uair_eff)
-        .sound_acmd("sound_attackairhirayman", rayman_uair_snd)
+        .game_acmd("game_attackairfrayman", rayman_fair, Priority::Low)
+        .effect_acmd("effect_attackairfrayman", rayman_fair_eff, Priority::Low)
+        .sound_acmd("sound_attackairfrayman", rayman_fair_snd, Priority::Low)
+        .game_acmd("game_attackairnrayman", rayman_nair, Priority::Low)
+        .effect_acmd("effect_attackairnrayman", rayman_nair_eff, Priority::Low)
+        .sound_acmd("sound_attackairnrayman", rayman_nair_snd, Priority::Low)
+        .game_acmd("game_attackairbrayman", rayman_bair, Priority::Low)
+        .effect_acmd("effect_attackairbrayman", rayman_bair_eff, Priority::Low)
+        .sound_acmd("sound_attackairbrayman", rayman_bair_snd, Priority::Low)
+        .game_acmd("game_attackairlwrayman", rayman_dair, Priority::Low)
+        .effect_acmd("effect_attackairlwrayman", rayman_dair_eff, Priority::Low)
+        .sound_acmd("sound_attackairlwrayman", rayman_dair_snd, Priority::Low)
+        .game_acmd("game_attackairhirayman", rayman_uair, Priority::Low)
+        .effect_acmd("effect_attackairhirayman", rayman_uair_eff, Priority::Low)
+        .sound_acmd("sound_attackairhirayman", rayman_uair_snd, Priority::Low)
         .install();
 }

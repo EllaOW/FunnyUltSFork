@@ -69,7 +69,7 @@ unsafe extern "C" fn toad_ftilt(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, 1.0);
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 11.0, /*Angle*/ 38, /*KBG*/ 76, /*FKB*/ 0, /*BKB*/ 48, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 9.5, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 11.0, /*Angle*/ 38, /*KBG*/ 76, /*FKB*/ 0, /*BKB*/ 48, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 9.5, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
 			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 11.0, /*Angle*/ 38, /*KBG*/ 76, /*FKB*/ 0, /*BKB*/ 48, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
 		}
 		frame(fighter.lua_state_agent, 16.0);
@@ -155,15 +155,15 @@ unsafe extern "C" fn toad_dtilt_expr(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito")
-        .game_acmd("game_attackhi3toad", toad_utilt)
-        .sound_acmd("sound_attackhi3toad", toad_utilt_snd)
-        .effect_acmd("effect_attackhi3toad", toad_utilt_eff)
-        .game_acmd("game_attacks3toad", toad_ftilt)
-        .effect_acmd("effect_attacks3toad", toad_ftilt_eff)
-        .sound_acmd("sound_attacks3toad", toad_ftilt_snd)
-        .game_acmd("game_attacklw3toad", toad_dtilt)
-        .effect_acmd("effect_attacklw3toad", toad_dtilt_eff)
-        .sound_acmd("sound_attacklw3toad", toad_dtilt_snd)
-        .expression_acmd("expression_attacklw3toad", toad_dtilt_expr)
+        .game_acmd("game_attackhi3toad", toad_utilt, Priority::Low)
+        .sound_acmd("sound_attackhi3toad", toad_utilt_snd, Priority::Low)
+        .effect_acmd("effect_attackhi3toad", toad_utilt_eff, Priority::Low)
+        .game_acmd("game_attacks3toad", toad_ftilt, Priority::Low)
+        .effect_acmd("effect_attacks3toad", toad_ftilt_eff, Priority::Low)
+        .sound_acmd("sound_attacks3toad", toad_ftilt_snd, Priority::Low)
+        .game_acmd("game_attacklw3toad", toad_dtilt, Priority::Low)
+        .effect_acmd("effect_attacklw3toad", toad_dtilt_eff, Priority::Low)
+        .sound_acmd("sound_attacklw3toad", toad_dtilt_snd, Priority::Low)
+        .expression_acmd("expression_attacklw3toad", toad_dtilt_expr, Priority::Low)
         .install();
 }

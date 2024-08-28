@@ -2,6 +2,7 @@ import os
 import shutil
 from zipfile import ZipFile
 import sys
+import subprocess
 
 try:
     inputs = (" ".join(sys.argv)).lower()
@@ -113,7 +114,7 @@ replace = [
     ['simon'],
     ['snake'],
     ['sonic'],
-    ['szerosuit', 'zero'],
+    ['szerosuit', 'zero', 'zss'],
     ['tantan', 'minmin', 'min'],
     ['toonlink', 'tink', 'toon'],
     ['trail', 'sora'],
@@ -148,9 +149,7 @@ def copytree(src, dst, symlinks=False, ignore=None):
         else:
             shutil.copy2(s, d)
 
-stream = os.popen('cargo skyline build --release --features="main_nro"')
-output = stream.read()
-output
+subprocess.run('cargo skyline build --release --features="main_nro"', shell=True)
 os.chdir('../')
 print(os.getcwd())
 old = r"target\aarch64-skyline-switch\release\libplugin.nro"

@@ -1,6 +1,9 @@
 import os
 import shutil
 from zipfile import ZipFile
+import sys
+import subprocess
+
 
 def copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
@@ -11,9 +14,7 @@ def copytree(src, dst, symlinks=False, ignore=None):
         else:
             shutil.copy2(s, d)
 
-stream = os.popen('cargo skyline build --release --features="main_nro"')
-output = stream.read()
-output
+subprocess.run('cargo skyline build --release --features="main_nro"', shell=True)
 os.chdir('../')
 print(os.getcwd())
 old = r"target\aarch64-skyline-switch\release\libplugin.nro"
@@ -80,6 +81,8 @@ if os.path.exists(r'target'):
                 print("Copying from romfs finished, now zipping")
             else:
                 print("Error! No romfs folder! Please check your install")
+            
+
             if os.path.exists(r'releases/Ultimate S Arcropolis (plugin and common files only).zip'):
                 os.remove(r'releases/Ultimate S Arcropolis (plugin and common files only).zip')
             file_paths = get_all_file_paths(new)

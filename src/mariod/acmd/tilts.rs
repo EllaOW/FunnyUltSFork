@@ -16,20 +16,20 @@ use super::*;
 
 pub fn install() {
 	Agent::new("mariod")
-    .acmd("game_attackhi3", doc_utilt)    
-    .acmd("effect_attackhi3", doc_utilt_eff)    
-    .acmd("game_attacks3", doc_ftilt)    
-    .acmd("game_attacks3hi", doc_ftilt)    
-    .acmd("game_attacks3lw", doc_ftilt)    
-    .acmd("game_attacklw3", doc_dtilt)    
-    .acmd("effect_attacklw3", doc_dtilt_eff)    
-    .acmd("effect_attacks3", doc_ftilt_s)    
-    .acmd("effect_attacks3hi", doc_ftilt_hi)    
-    .acmd("sound_attacks3", doc_ftilt_snd)    
-    .acmd("sound_attacks3hi", doc_ftilt_snd)    
-    .acmd("sound_attacks3lw", doc_ftilt_snd)    
-    .acmd("sound_attacklw3", doc_dtilt_snd)    
-    .acmd("effect_attacks3lw", doc_ftilt_lw)    
+    .acmd("game_attackhi3", doc_utilt, Priority::Low)    
+    .acmd("effect_attackhi3", doc_utilt_eff, Priority::Low)    
+    .acmd("game_attacks3", doc_ftilt, Priority::Low)    
+    .acmd("game_attacks3hi", doc_ftilt, Priority::Low)    
+    .acmd("game_attacks3lw", doc_ftilt, Priority::Low)    
+    .acmd("game_attacklw3", doc_dtilt, Priority::Low)    
+    .acmd("effect_attacklw3", doc_dtilt_eff, Priority::Low)    
+    .acmd("effect_attacks3", doc_ftilt_s, Priority::Low)    
+    .acmd("effect_attacks3hi", doc_ftilt_hi, Priority::Low)    
+    .acmd("sound_attacks3", doc_ftilt_snd, Priority::Low)    
+    .acmd("sound_attacks3hi", doc_ftilt_snd, Priority::Low)    
+    .acmd("sound_attacks3lw", doc_ftilt_snd, Priority::Low)    
+    .acmd("sound_attacklw3", doc_dtilt_snd, Priority::Low)    
+    .acmd("effect_attacks3lw", doc_ftilt_lw, Priority::Low)    
     .install();
 }
 
@@ -49,7 +49,13 @@ unsafe extern "C" fn doc_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 3, /*Frames*/ 3.0, /*Unk*/ false);
 			AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 4, /*Frames*/ 3.0, /*Unk*/ false);
 		}
-		frame(fighter.lua_state_agent, /*Frames*/ 13.0);
+		frame(fighter.lua_state_agent, 8.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear(fighter.module_accessor, 0, false);
+			AttackModule::clear(fighter.module_accessor, 2, false);
+			AttackModule::clear(fighter.module_accessor, 4, false);
+		}
+		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}

@@ -24,6 +24,7 @@ static mut DO_WALLJUMP_FORCE: [bool; 8] = [false; 8];
 static mut HAS_DEADED: [bool; 8] = [false; 8];
 static mut WAS_SLIDE: [bool; 8] = [false; 8];
 static mut FINAL_DURATION : [i32; 8] = [0; 8];
+static mut CAPTURE_TIME : [i32; 8] = [0; 8];
 static mut X : [f32; 8] = [0.0; 8];
 static mut Y : [f32; 8] = [0.0; 8];
 static mut X_MAX : f32 = 1.155;
@@ -78,7 +79,7 @@ pub(crate) unsafe fn jump_vc(fighter: &mut L2CAgentBase) -> () {
 	}
 }
 pub(crate) unsafe fn jump_aerial_vc(fighter: &mut L2CAgentBase) -> () {
-	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 6);
+	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 4);
 	macros::STOP_SE(fighter, Hash40::new("se_pikmin_attackhard_s02"));
 	match rand_val {
 		0 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackhard_s02")),
