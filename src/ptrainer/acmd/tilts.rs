@@ -15,9 +15,9 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    Agent::new("pzenigame")
+    /*Agent::new("pzenigame")
     .acmd("game_attacklw3", squirtle_dtilt, Priority::Low)    
-    .install();
+    .install();*/
 
 	Agent::new("plizardon")
     .acmd("game_attacks3", zard_ftilt, Priority::Low)    
@@ -35,7 +35,7 @@ pub fn install() {
     .install();
 }
 
-unsafe extern "C" fn squirtle_dtilt(fighter: &mut L2CAgentBase) {
+/*unsafe extern "C" fn squirtle_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -51,7 +51,7 @@ unsafe extern "C" fn squirtle_dtilt(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}
+}*/
 unsafe extern "C" fn zard_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
