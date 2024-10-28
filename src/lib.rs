@@ -31,10 +31,10 @@ pub fn is_on_ryujinx() -> bool {
         // Ryujinx skip based on text addr
         let text_addr = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64;
         if text_addr == 0x8504000 || text_addr == 0x80004000 {
-            println!("we are on Ryujinx");
+            println!("we are on Emulator");
             return true;
         } else {
-            println!("we are not on Ryujinx");
+            println!("we are not on Emulator");
             return false;
         }
     }
@@ -160,14 +160,14 @@ unsafe fn set_interval_2(ctx: &mut InlineCtx) {
 
 static mut RUN: AtomicBool = AtomicBool::new(false);
 
-#[skyline::hook(offset = 0x3810664, inline)]
+#[skyline::hook(offset = 0x3810684, inline)]
 unsafe fn vsync_count_thread(_: &skyline::hooks::InlineCtx) {
     RUN.store(true, Ordering::SeqCst);
 }
 
 static mut DUMMY_BLOCK: [u8; 0x100] = [0; 0x100];
 
-#[skyline::hook(offset = 0x374777C, inline)]
+#[skyline::hook(offset = 0x374779C, inline)]
 unsafe fn run_scene_update(_: &skyline::hooks::InlineCtx) {
     while !RUN.swap(false, Ordering::SeqCst) {
         skyline::nn::hid::GetNpadFullKeyState(DUMMY_BLOCK.as_mut_ptr() as _, &0);
@@ -330,9 +330,9 @@ pub extern "C" fn is_ultimate_s() {}
 #[no_mangle]
 pub extern "C" fn main() {
 
-    if !quick_validate_install() {
+    /*if !quick_validate_install() {
         return; // don't do anything else since they don't have all dependencies
-    }
+    }*/
 
     //allows online play with added chars
     unsafe { 
@@ -347,21 +347,21 @@ pub extern "C" fn main() {
     }
 	
 	//Common
-    //if !is_on_ryujinx() || is_on_ryujinx() {
-        //println!("We're on switch! Yay!");
-    unsafe {
-            OFFSET1 = calc_nnsdk_offset() + 0x429d60;
-            OFFSET2 = calc_nnsdk_offset() + 0x26e94;
+    if !is_on_ryujinx(){
+        println!("We're on switch! Yay!");
+        unsafe {
+                OFFSET1 = calc_nnsdk_offset() + 0x429d60;
+                OFFSET2 = calc_nnsdk_offset() + 0x26e94;
+        }
+        
+        skyline::install_hooks!(
+                set_interval_1,
+                set_interval_2,
+                run_scene_update,
+                vsync_count_thread,
+        );
     }
-    
-    skyline::install_hooks!(
-            set_interval_1,
-            set_interval_2,
-            run_scene_update,
-            vsync_count_thread,
-    );
     skyline::install_hooks!(change_version_string_hook);
-    //}
 	nro::add_hook(nro_hook).unwrap();
 
 
@@ -808,8 +808,8 @@ pub extern "C" fn main() {
 	//Stage Patching
 
 	//Arena Ferox Screenshake
-	skyline::patching::Patch::in_text(0x28444cc + 0xc80).data(0x52800009u32);
-    skyline::patching::Patch::in_text(0x28440f4 + 0xc80).data(0x52800009u32);
-    skyline::patching::Patch::in_text(0x2844500+ 0xc80).nop();
-    skyline::patching::Patch::in_text(0x2844128+ 0xc80).nop();
+	skyline::patching::Patch::in_text(0x28444cc + 0xc80 + 0x20).data(0x52800009u32);
+    skyline::patching::Patch::in_text(0x28440f4 + 0xc80 + 0x20).data(0x52800009u32);
+    skyline::patching::Patch::in_text(0x2844500+ 0xc80 + 0x20).nop();
+    skyline::patching::Patch::in_text(0x2844128+ 0xc80 + 0x20).nop();
 }
